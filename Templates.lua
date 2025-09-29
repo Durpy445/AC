@@ -4,6 +4,20 @@ local Templates = {
         SquarebuildList = {}
     },
 
+    TeamLookup = {
+        "White",
+        "Black"
+    },
+
+    PieceLookup = {
+        K = "King",
+        R = "Rook",
+        H = "Knight",
+        B = "Bishop",
+        Q = "Queen",
+        P = "Pawn"
+    },
+
     PieceTemplate = {
         Location = { nil, nil },
         PieceID = nil,
