@@ -1,6 +1,8 @@
 local Templates = {
     TileTemplate = {
         Piece = nil,
+        TileID = nil,
+        Position = {},
         SquarebuildList = {}
     },
 

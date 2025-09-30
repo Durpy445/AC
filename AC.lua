@@ -10,11 +10,10 @@ local Board = {
 
     },
     Tiles = {},
+    AllTiles = {},
     Dictionary = {
         PieceList = {
-            Teams = {
-                Empty = {}
-            },
+            Teams = {},
             AllPieces = {},
             PiecesWithEffects = {},
         },
@@ -47,6 +46,6 @@ local Board = {
 local Basics = require("Basics")
 local Generators = require("Generators")
 
+Board.Tiles = Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
 
-
-Board.Tiles = Generators.FormatTable(require("Boards").Deafult, { 8, 8 })
+print(Basics.dump(Generators.GetAllTiles(Board)))
