@@ -8,6 +8,10 @@ Basics.shallow_copy = function(t)
     return t2
 end
 
+Basics.RandomFromTable = function(RandomTable)
+    return RandomTable[math.random(1, #RandomTable)]
+end
+
 Basics.dump = function(o, indent)
     indent = indent or 0
     local indentStr = string.rep("  ", indent)

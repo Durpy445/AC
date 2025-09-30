@@ -56,13 +56,11 @@ end
 Generators.AddPieceToLists = function(Board, Piece)
     Board.Dictionary.PieceList.AllPieces[Piece.PieceID] = Piece
 
-    --Board.Dictionary.PieceList.Teams[Piece.Team] = {}
-
-    if Board.Dictionary.PieceList.Teams[Piece.Team] == nil then
-        Board.Dictionary.PieceList.Teams[Piece.Team] = {}
+    if Board.Teams[Piece.Team] == nil then
+        Board.Teams[Piece.Team] = {}
     end
 
-    Board.Dictionary.PieceList.Teams[Piece.Team][Piece.PieceID] = Piece
+    Board.Teams[Piece.Team][Piece.PieceID] = Piece
 end
 
 Generators.GetAllPieces = function(Board)
@@ -71,6 +69,10 @@ end
 
 Generators.GetAllTiles = function(Board)
     return Board.AllTiles
+end
+
+Generators.RemovePiece = function(Board, PieceID)
+    local Piece = Board.Dictionary.AllPieces[PieceID]
 end
 
 Generators.GetAllEmptyTiles = function(Board)
@@ -84,6 +86,7 @@ Generators.GetAllEmptyTiles = function(Board)
     end
     return AllTiles
 end
+
 
 
 

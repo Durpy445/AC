@@ -13,7 +13,6 @@ local Board = {
     AllTiles = {},
     Dictionary = {
         PieceList = {
-            Teams = {},
             AllPieces = {},
             PiecesWithEffects = {},
         },
@@ -47,5 +46,7 @@ local Basics = require("Basics")
 local Generators = require("Generators")
 
 Board.Tiles = Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
-
+for index, Piece in ipairs(Generators.GetAllPieces(Board)) do
+    Generators.RemovePiece(Board, Piece.PieceID)
+end
 print(Basics.dump(Generators.GetAllTiles(Board)))
