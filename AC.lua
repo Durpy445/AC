@@ -21,7 +21,8 @@ local Board = {
 
         },
         SquarebuildList = {
-
+            AllSquarebuilds = {},
+            TimedSquarebuilds = {}
         }
     },
     Events = {
@@ -46,10 +47,5 @@ local Board = {
 local Basics = require("Basics")
 local Generators = require("Generators")
 
-Board.Tiles = Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
-for index, Piece in pairs(Generators.GetAllPieces(Board)) do
-    print("Index:", index)
-    Generators.RemovePiece(Board, Piece.PieceID)
-end
-
+Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
 print(Basics.dump(Board))

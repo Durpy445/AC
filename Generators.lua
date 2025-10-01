@@ -32,7 +32,7 @@ Generators.FormatTable = function(Board, PassedTable, Size)
         end
         table.insert(New, Row)
     end
-
+    Board.Tiles = New
     for y, value in ipairs(Forced) do
         for x, Small in ipairs(value) do
             local PieceName = PieceLookup[Small[1]]
@@ -42,11 +42,9 @@ Generators.FormatTable = function(Board, PassedTable, Size)
             Piece.Team = Team
             Piece.PieceType = Pieces[PieceName]
             Piece.PieceID = Generators.GenerateID(Board)
-            New[y][x].Piece = Piece
             Generators.AddPieceToLists(Board, Piece)
         end
     end
-    return New
 end
 
 Generators.GenerateID = function(Board)
@@ -66,6 +64,8 @@ Generators.AddPieceToLists = function(Board, Piece)
         Board.Teams[Piece.Team] = Basics.deep_copy(Templates.TeamTemplate)
     end
     Board.Teams[Piece.Team].Pieces[Piece.PieceID] = Piece
+    print(Basics.dump(Board.Tiles))
+    Board.Tiles[Piece.Position[1]][Piece.Position[2]].Piece = Piece
 end
 
 Generators.GetAllPieces = function(Board)
@@ -78,9 +78,7 @@ end
 
 Generators.RemovePiece = function(Board, PieceID)
     local Piece = Board.Dictionary.PieceList.AllPieces[PieceID]
-    print(Basics.dump(Piece))
     local Tile = Board.Tiles[Piece.Position[1]][Piece.Position[2]]
-    print(Basics.dump(Tile))
     Board.Dictionary.PieceList.AllPieces[PieceID] = nil
     Board.Dictionary.PieceList.PiecesWithEffects[PieceID] = nil
     Board.Teams[Piece.Team].Pieces[PieceID] = nil
@@ -89,6 +87,24 @@ Generators.RemovePiece = function(Board, PieceID)
     end
     Tile.Piece = nil
     Board.IDs[PieceID] = nil
+end
+
+Generators.RemoveSquarebuild = function(Board, SquarebuildID)
+    local Squarebuild = Board.Dictionary.SquarebuildList.AllSquarebuilds[SquarebuildID]
+    Board.Dictionary.SquarebuildList.AllSquarebuilds[SquarebuildID] = nil
+    Board.Dictionary.SquarebuildList.TimedSquarebuilds[SquarebuildID] = nil
+    local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
+    Tile.SquarebuildList[SquarebuildID] = nil
+    Board.IDs[SquarebuildID] = nil
+end
+
+Generators.AddSquarebuildToLists = function(Board, Squarebuild)
+    Board.Dictionary.AllSquarebuilds[Squarebuild.SquarebuildID] = Squarebuild
+    if Squarebuild.SquarebuildType.Type == "Timed" then
+        Board.Dictionary.TimedSquarebuilds[Squarebuild.SquarebuildID] = Squarebuild
+    end
+    local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
+    Tile.SquarebuildList[Squarebuild.SquarebuildID] = Squarebuild
 end
 
 Generators.GetAllEmptyTiles = function(Board)
