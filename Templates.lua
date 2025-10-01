@@ -1,6 +1,6 @@
 local Templates = {
     TileTemplate = {
-        Piece = nil,
+        Piece = {},
         TileID = nil,
         Position = {},
         SquarebuildList = {}
@@ -21,7 +21,7 @@ local Templates = {
     },
 
     PieceTemplate = {
-        Location = { nil, nil },
+        Position = { nil, nil },
         PieceID = nil,
         Team = nil,
         Effects = {},
@@ -43,9 +43,15 @@ local Templates = {
     SquarebuildTemplate = {
         SquareBuildID = nil,
         Name = nil,
-        Type = nil,
+        SquarebuildType = nil,
         Data = {}
     },
+
+    SquarebuildTypeTemplate = {
+        Type = nil,
+        SquarebuildFunction = nil
+    },
+
 
     ModifierTemplate = {
         StartingFunction = nil,

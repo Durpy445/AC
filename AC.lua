@@ -6,6 +6,7 @@ local Board = {
     MofifierAmount = nil,
     NewEventChance = nil,
     MaxEvents = nil,
+    IDs = {},
     Teams = {
 
     },
@@ -46,7 +47,9 @@ local Basics = require("Basics")
 local Generators = require("Generators")
 
 Board.Tiles = Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
-for index, Piece in ipairs(Generators.GetAllPieces(Board)) do
+for index, Piece in pairs(Generators.GetAllPieces(Board)) do
+    print("Index:", index)
     Generators.RemovePiece(Board, Piece.PieceID)
 end
-print(Basics.dump(Generators.GetAllTiles(Board)))
+
+print(Basics.dump(Board))
