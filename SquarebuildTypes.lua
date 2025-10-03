@@ -8,6 +8,7 @@ SquarebuildTypes.Mine = {
         local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
         local PieceID = Tile.Piece.PieceID
         Generators.RemovePiece(Board, PieceID)
+        Generators.RemoveSquarebuild(Board, Squarebuild.SquarebuildID)
     end,
 }
 
