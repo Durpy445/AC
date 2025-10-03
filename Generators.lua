@@ -99,12 +99,21 @@ Generators.RemoveSquarebuild = function(Board, SquarebuildID)
 end
 
 Generators.AddSquarebuildToLists = function(Board, Squarebuild)
+    if Squarebuild.SquarebuildID == nil then
+        Squarebuild.SquarebuildID = Generators.GenerateID(Board)
+    end
     Board.Dictionary.AllSquarebuilds[Squarebuild.SquarebuildID] = Squarebuild
     if Squarebuild.SquarebuildType.Type == "Timed" then
         Board.Dictionary.TimedSquarebuilds[Squarebuild.SquarebuildID] = Squarebuild
     end
     local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
     Tile.SquarebuildList[Squarebuild.SquarebuildID] = Squarebuild
+end
+
+Generators.RunSquarebuild = function(Board, SquarebuildID)
+    local Squarebuild = Board.Dictionary.AllSquarebuilds[SquarebuildID]
+    local RunFunction = Squarebuild.SquarebuildType.SquarebuildFunction
+    RunFunction(Board, Squarebuild)
 end
 
 Generators.GetAllEmptyTiles = function(Board)
