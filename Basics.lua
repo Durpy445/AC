@@ -34,7 +34,7 @@ Basics.dump = function(o, indent)
         local s = "{\n"
         for k, v in pairs(o) do
             local keyStr = type(k) == "number" and "[" .. k .. "]" or '["' .. tostring(k) .. '"]'
-            print(keyStr)
+            --print(keyStr)
             s = s .. indentStr .. "  " .. keyStr .. " = " .. Basics.dump(v, indent + 1) .. ",\n"
         end
         return s .. indentStr .. "}"

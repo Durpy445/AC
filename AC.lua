@@ -48,4 +48,4 @@ local Basics = require("Basics")
 local Generators = require("Generators")
 
 Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
-print(Basics.dump(Board))
+--print(Basics.dump(Board))

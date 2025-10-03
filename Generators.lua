@@ -64,7 +64,7 @@ Generators.AddPieceToLists = function(Board, Piece)
         Board.Teams[Piece.Team] = Basics.deep_copy(Templates.TeamTemplate)
     end
     Board.Teams[Piece.Team].Pieces[Piece.PieceID] = Piece
-    print(Basics.dump(Board.Tiles))
+    --print(Basics.dump(Board.Tiles))
     Board.Tiles[Piece.Position[1]][Piece.Position[2]].Piece = Piece
 end
 
