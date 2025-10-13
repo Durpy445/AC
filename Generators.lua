@@ -66,6 +66,7 @@ Generators.AddPieceToLists = function(Board, Piece)
     Board.Teams[Piece.Team].Pieces[Piece.PieceID] = Piece
     --print(Basics.dump(Board.Tiles))
     Board.Tiles[Piece.Position[1]][Piece.Position[2]].Piece = Piece
+    Generators.GenAddPieceLog(Board, Piece)
 end
 
 Generators.GetAllPieces = function(Board)
@@ -79,6 +80,7 @@ end
 Generators.RemovePiece = function(Board, PieceID)
     local Piece = Board.Dictionary.PieceList.AllPieces[PieceID]
     local Tile = Board.Tiles[Piece.Position[1]][Piece.Position[2]]
+    Generators.GenRemovePieceLog(Board, Piece)
     Board.Dictionary.PieceList.AllPieces[PieceID] = nil
     Board.Dictionary.PieceList.PiecesWithEffects[PieceID] = nil
     Board.Teams[Piece.Team].Pieces[PieceID] = nil
@@ -128,6 +130,36 @@ Generators.GetAllEmptyTiles = function(Board)
 end
 
 
+Generators.GenAddPieceLog = function(Board, Piece)
+    local Pos = Piece.Position
+    local PieceType = Piece.PieceType
+    local Log = { "Add", "Piece", PieceType, Basics.shallow_copy(Pos) }
+    Generators.AddToChangeLog(Board, Log)
+end
+Generators.GenRemovePieceLog = function(Board, Piece)
+    local Pos = Piece.Position
+    local PieceType = Piece.PieceType
+    local Log = { "Remove", "Piece", PieceType, Basics.shallow_copy(Pos) }
+    Generators.AddToChangeLog(Board, Log)
+end
+Generators.GenMovePieceLog = function(Board, Piece, OldPos)
+    local Pos = Piece.Position
+    local PieceType = Piece.PieceType
+    local Log = { "Move", "Piece", PieceType, Basics.shallow_copy(OldPos), Basics.shallow_copy(Piece.Position) }
+    Generators.AddToChangeLog(Board, Log)
+end
+Generators.LogToNotation = function(Log)
+    local Command = Templates.NotationLookup[Log[1]]
+    local Type = string.sub(Log[2], 1, 1)
+    local Piece = Templates.ReversePieceLookup[Log[3].Name]
+    local Arg1 = Log[4]
+    local Arg2 = Log[5]
+    return (Command .. Type .. Piece .. Basics.dump(Arg1))
+end
+
+Generators.AddToChangeLog = function(Board, ToAdd)
+    table.insert(Board.ChangeLog, ToAdd)
+end
 
 
 

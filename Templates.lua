@@ -19,6 +19,21 @@ local Templates = {
         Q = "Queen",
         P = "Pawn"
     },
+    ReversePieceLookup = {
+        King = "K",
+        Rook = "R",
+        Knight = "H",
+        Bishop = "B",
+        Queen = "Q",
+        Pawn = "P"
+    },
+
+
+    NotationLookup = {
+        Add = "+",
+        Remove = "-",
+        Move = ">>",
+    },
 
     PieceTemplate = {
         Position = { nil, nil },

@@ -49,3 +49,7 @@ local Generators = require("Generators")
 
 Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
 --print(Basics.dump(Board))
+--print(Basics.dump(Board.ChangeLog))
+for index, value in pairs(Board.ChangeLog) do
+    print(Basics.dump(Generators.LogToNotation(value)))
+end
