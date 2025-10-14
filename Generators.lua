@@ -151,10 +151,10 @@ end
 Generators.LogToNotation = function(Log)
     local Command = Templates.NotationLookup[Log[1]]
     local Type = string.sub(Log[2], 1, 1)
-    local Piece = Templates.ReversePieceLookup[Log[3].Name]
+    local TypeOf = Templates.ReversePieceLookup[Log[3].Name]
     local Arg1 = Log[4]
     local Arg2 = Log[5]
-    return (Command .. Type .. Piece .. Basics.dump(Arg1))
+    return (Command .. Type .. TypeOf .. Basics.dump(Arg1))
 end
 
 Generators.AddToChangeLog = function(Board, ToAdd)
