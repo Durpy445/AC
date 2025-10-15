@@ -2,7 +2,6 @@
 ModifierTemplate = {
     StartingFunction = nil,
     TurnFunction = nil,
-    Intensity = nil,
     GenerationFunctiPon = nil,
 },
 ]]
@@ -13,11 +12,12 @@ Modifiers.Minefield = {
     StartingFunction = function(Board)
         local EmptyTiles = Generators.GetAllEmptyTiles(Board)
         local Choosing = 4
-        local Chose = {}
         for i = 1, Choosing, 1 do
-            table.insert(Chose, Basics.RandomFromTable(EmptyTiles))
+            local Mine = Generators.CreateSquarebuild("Mine")
+            Generators.AddSquarebuildToLists(Mine)
+            local Tile = Basics.RandomFromTable(EmptyTiles)
+            table.insert(Tile.SquarebuildList, Mine)
         end
     end,
     TurnFunction = nil,
-    GenerationFunction = nil,
 }

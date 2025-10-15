@@ -2,13 +2,13 @@ local Generators = {}
 
 local Pieces = require("Pieces")
 local Templates = require("Templates")
+local SquarebuildTypes = require("SquarebuildTypes")
 local Basics = require("Basics")
 local PieceLookup = Templates.PieceLookup
 local TeamLookup = Templates.TeamLookup
 
 local BoardTemplate = Templates.BoardTemplate
 local PieceTemplate = Templates.PieceTemplate
-
 
 Generators.FormatTable = function(Board, PassedTable, Size)
     local New = {}
@@ -98,6 +98,12 @@ Generators.RemoveSquarebuild = function(Board, SquarebuildID)
     local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
     Tile.SquarebuildList[SquarebuildID] = nil
     Board.IDs[SquarebuildID] = nil
+end
+
+Generators.CreateSquarebuild = function(Name)
+    local SquarebuildTemplate = Basics.deep_copy(Templates.SquarebuildTemplate)
+    SquarebuildTemplate.SquarebuildType = SquarebuildTypes[Name]
+    return SquarebuildTemplate
 end
 
 Generators.AddSquarebuildToLists = function(Board, Squarebuild)
