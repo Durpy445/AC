@@ -154,6 +154,18 @@ Generators.GenMovePieceLog = function(Board, Piece, OldPos)
     local Log = { "Move", "Piece", PieceType, Basics.shallow_copy(OldPos), Basics.shallow_copy(Piece.Position) }
     Generators.AddToChangeLog(Board, Log)
 end
+Generators.GenAddSquarebuildLog = function(Board, Squarebuild)
+    local Pos = Squarebuild.Position
+    local SquarebuildType = Squarebuild.SquarebuildType
+    local Log = { "Add", "Squarebuild", SquarebuildType, Basics.shallow_copy(Pos) }
+    Generators.AddToChangeLog(Board, Log)
+end
+Generators.GenRemoveSquarebuildLog = function(Board, Squarebuild)
+    local Pos = Squarebuild.Position
+    local SquarebuildType = Squarebuild.SquarebuildType
+    local Log = { "Remove", "Squarebuild", Squarebuild, Basics.shallow_copy(Pos) }
+    Generators.AddToChangeLog(Board, Log)
+end
 Generators.LogToNotation = function(Log)
     local Command = Templates.NotationLookup[Log[1]]
     local Type = string.sub(Log[2], 1, 1)
