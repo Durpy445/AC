@@ -93,6 +93,7 @@ end
 
 Generators.RemoveSquarebuild = function(Board, SquarebuildID)
     local Squarebuild = Board.Dictionary.SquarebuildList.AllSquarebuilds[SquarebuildID]
+    Generators.GenRemoveSquarebuildLog(Board, Squarebuild)
     Board.Dictionary.SquarebuildList.AllSquarebuilds[SquarebuildID] = nil
     Board.Dictionary.SquarebuildList.TimedSquarebuilds[SquarebuildID] = nil
     local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
@@ -116,6 +117,7 @@ Generators.AddSquarebuildToLists = function(Board, Squarebuild)
     end
     local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
     Tile.SquarebuildList[Squarebuild.SquarebuildID] = Squarebuild
+    Generators.GenAddSquarebuildLog(Board, Squarebuild)
 end
 
 Generators.RunSquarebuild = function(Board, SquarebuildID)
