@@ -21,3 +21,4 @@ Modifiers.Minefield = {
     end,
     TurnFunction = nil,
 }
+return Modifiers

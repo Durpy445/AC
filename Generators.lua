@@ -181,6 +181,21 @@ Generators.AddToChangeLog = function(Board, ToAdd)
     table.insert(Board.ChangeLog, ToAdd)
 end
 
+Generators.AddModifierToBoard = function(Board, Modifier)
+    table.insert(Board.Modifiers, Modifier)
+end
+Generators.RunModiferStartingFunction = function(Board, Modifier)
+    local StartingFunction = Modifier.StartingFunction
+    if StartingFunction then
+        StartingFunction(Board)
+    end
+end
+Generators.RunModiferTurnFunction = function(Board, Modifier)
+    local TurnFunction = Modifier.TurnFunction
+    if TurnFunction then
+        TurnFunction(Board)
+    end
+end
 
 
 return Generators
