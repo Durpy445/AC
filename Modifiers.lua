@@ -1,14 +1,8 @@
---[[
-ModifierTemplate = {
-    StartingFunction = nil,
-    TurnFunction = nil,
-    GenerationFunctiPon = nil,
-},
-]]
 local Generators = require("Generators")
 local Basics = require("Basics")
 local Modifiers = {}
 Modifiers.Minefield = {
+    Weight = 1,
     StartingFunction = function(Board)
         local EmptyTiles = Generators.GetAllEmptyTiles(Board)
         local Choosing = 4
@@ -20,5 +14,6 @@ Modifiers.Minefield = {
         end
     end,
     TurnFunction = nil,
+    Description = "The board is a Minefield"
 }
 return Modifiers

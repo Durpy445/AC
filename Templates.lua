@@ -69,14 +69,18 @@ local Templates = {
 
 
     ModifierTemplate = {
+        Weight = nil,
         StartingFunction = nil,
         TurnFunction = nil,
-        Intensity = nil,
         GenerationFunction = nil,
+        Description = nil
     },
 
     EventTemplate = {
-        EventFunction = {}
+        Weight = nil,
+        EventFunction = nil,
+        DisplayName = nil,
+        Description = nil
     },
 
     BoardTemplate = {
