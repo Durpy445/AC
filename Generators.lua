@@ -196,6 +196,12 @@ Generators.RunModiferTurnFunction = function(Board, Modifier)
         TurnFunction(Board)
     end
 end
+Generators.RunEventFunction = function(Board, Event)
+    local EventFunction = Event.EventFunction
+    if EventFunction then
+        EventFunction(Board)
+    end
+end
 
 
 return Generators
