@@ -202,6 +202,26 @@ Generators.RunEventFunction = function(Board, Event)
         EventFunction(Board)
     end
 end
+Generators.GetNextEvent = function(Board)
+    local EventQueue = Board.Events.EventQueue
+    for index, Queue in pairs(EventQueue) do
+        for key, Event in pairs(Queue) do
+            table.remove(Queue, key)
+            return Event
+        end
+    end
+end
+Generators.CheckNextEvent = function(Board)
+    local EventQueue = Board.Events.EventQueue
+    for index, Queue in pairs(EventQueue) do
+        for key, Event in pairs(Queue) do
+            return Event
+        end
+    end
+end
+Generators.AddEvent = function(Board, Event)
+
+end
 
 
 return Generators
