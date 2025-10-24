@@ -232,6 +232,19 @@ Generators.AddEvent = function(Board, Event, Type)
         table.insert(Check["Random"], Event)
     end
 end
-
+Generators.RunEffectFunction = function(Board, Effect, Piece)
+    local EffectFunction = Effect.EffectFunction
+    if EffectFunction then
+        EffectFunction(Board, Piece)
+    end
+end
+Generators.AddEffect = function(Board, Piece, Effect)
+    table.insert(Piece.Effects, Basics.deep_copy(Effect))
+    table.insert(Board.Dictionary.PieceList.PiecesWithEffects, Piece)
+end
+Generators.RemoveEffect = function(Board, Piece, Effect)
+    Basics.FindAndRemove(Piece.Effects, Effect)
+    Basics.FindAndRemove(Board.Dictionary.PieceList.PiecesWithEffects, Piece)
+end
 
 return Generators

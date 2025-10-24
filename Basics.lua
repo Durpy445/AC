@@ -43,4 +43,18 @@ Basics.dump = function(o, indent)
     end
 end
 
+Basics.FindMatch = function(Haystack, Needle)
+    for key, value in pairs(Haystack) do
+        if value == Needle then
+            return key
+        end
+    end
+    return nil
+end
+
+Basics.FindAndRemove = function(Haystack, Needle)
+    local Index = Basics.FindMatch(Haystack, Needle)
+    table.remove(Haystack, Index)
+end
+
 return Basics
