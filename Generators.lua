@@ -2,7 +2,6 @@ local Generators = {}
 
 local Pieces = require("Pieces")
 local Templates = require("Templates")
-local SquarebuildTypes = require("SquarebuildTypes")
 local Basics = require("Basics")
 local PieceLookup = Templates.PieceLookup
 local TeamLookup = Templates.TeamLookup
@@ -101,9 +100,9 @@ Generators.RemoveSquarebuild = function(Board, SquarebuildID)
     Board.IDs[SquarebuildID] = nil
 end
 
-Generators.CreateSquarebuild = function(Name)
+Generators.CreateSquarebuild = function(SquarebuildType)
     local SquarebuildTemplate = Basics.deep_copy(Templates.SquarebuildTemplate)
-    SquarebuildTemplate.SquarebuildType = SquarebuildTypes[Name]
+    SquarebuildTemplate.SquarebuildType = SquarebuildType
     return SquarebuildTemplate
 end
 
