@@ -27,9 +27,7 @@ local Board = {
     },
     Events = {
         EventQueue = {
-            Admin = {
-
-            },
+            Admin = {},
             Robux = {},
             Tix = {},
             Random = {},
@@ -48,6 +46,7 @@ local Basics = require("Basics")
 local Generators = require("Generators")
 
 Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
+Generators.AddEvent(Board, require("Events").AddTripmine)
 --print(Basics.dump(Board))
 --print(Basics.dump(Board.ChangeLog))
 for index, value in pairs(Board.ChangeLog) do

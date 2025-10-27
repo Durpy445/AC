@@ -219,12 +219,14 @@ Generators.CheckNextEvent = function(Board)
     end
 end
 Generators.AddEvent = function(Board, Event, Type)
+    print("A")
     local Check = {
-        Admin = Board.Event.EventQueue.Admin,
-        Robux = Board.Event.EventQueue.Robux,
-        Tix = Board.Event.EventQueue.Tix,
-        Random = Board.Event.EventQueue.Random
+        Admin = Board.Events.EventQueue.Admin,
+        Robux = Board.Events.EventQueue.Robux,
+        Tix = Board.Events.EventQueue.Tix,
+        Random = Board.Events.EventQueue.Random
     }
+    print("B")
     if Check[Type] then
         table.insert(Check[Type], Event)
     else
