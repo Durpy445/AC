@@ -6,10 +6,12 @@ Events.AddTripmine = {
     Weight = 1,
     EventFunction = function(board)
         EmptyTiles = Generators.GetAllEmptyTiles(board)
-        local Mine = Generators.CreateSquarebuild("Mine")
-        Generators.AddSquarebuildToLists(Mine)
+        print(Basics.dump(EmptyTiles))
         local Tile = Basics.RandomFromTable(EmptyTiles)
-        table.insert(Tile.SquarebuildList, Mine)
+        local Mine = Generators.CreateSquarebuild("Mine")
+        print(Basics.dump(Tile))
+        Mine["Position"] = Basics.shallow_copy(Tile["Position"])
+        Generators.AddSquarebuildToLists(board, Mine)
     end,
     DisplayName = "Add Tripmine",
     Description = "Adds Tripmine to a random spot on the board"

@@ -24,6 +24,14 @@ Basics.deep_copy = function(orig)
 end
 
 Basics.RandomFromTable = function(RandomTable)
+    if #RandomTable == 0 then
+        local nums = {}
+        for i, x in pairs(RandomTable) do
+            print(i)
+            table.insert(nums, i)
+        end
+        return (RandomTable[Basics.RandomFromTable(nums)])
+    end
     return RandomTable[math.random(1, #RandomTable)]
 end
 

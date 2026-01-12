@@ -107,10 +107,11 @@ Generators.CreateSquarebuild = function(SquarebuildType)
 end
 
 Generators.AddSquarebuildToLists = function(Board, Squarebuild)
+    print(Basics.dump(Squarebuild))
     if Squarebuild.SquarebuildID == nil then
         Squarebuild.SquarebuildID = Generators.GenerateID(Board)
     end
-    Board.Dictionary.AllSquarebuilds[Squarebuild.SquarebuildID] = Squarebuild
+    Board.Dictionary.SquarebuildList.AllSquarebuilds[Squarebuild.SquarebuildID] = Squarebuild
     if Squarebuild.SquarebuildType.Type == "Timed" then
         Board.Dictionary.TimedSquarebuilds[Squarebuild.SquarebuildID] = Squarebuild
     end
@@ -170,7 +171,13 @@ end
 Generators.LogToNotation = function(Log)
     local Command = Templates.NotationLookup[Log[1]]
     local Type = string.sub(Log[2], 1, 1)
-    local TypeOf = Templates.ReversePieceLookup[Log[3].Name]
+    local TypeOf = "N/A"
+    if Log[2] == "Piece" then
+        TypeOf = Templates.ReversePieceLookup[Log[3].Name]
+    else
+        TypeOf = Log[3]
+    end
+
     local Arg1 = Log[4]
     local Arg2 = Log[5]
     return (Command .. Type .. TypeOf .. Basics.dump(Arg1))
@@ -197,6 +204,7 @@ Generators.RunModiferTurnFunction = function(Board, Modifier)
 end
 Generators.RunEventFunction = function(Board, Event)
     local EventFunction = Event.EventFunction
+    print("EventFunction", EventFunction)
     if EventFunction then
         EventFunction(Board)
     end
@@ -209,6 +217,10 @@ Generators.GetNextEvent = function(Board)
             return Event
         end
     end
+end
+Generators.RunNextEvent = function(Board)
+    local NextEvent = Generators.GetNextEvent(Board)
+    Generators.RunEventFunction(Board, NextEvent)
 end
 Generators.CheckNextEvent = function(Board)
     local EventQueue = Board.Events.EventQueue
