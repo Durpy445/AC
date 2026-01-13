@@ -27,11 +27,16 @@ Basics.RandomFromTable = function(RandomTable)
     if #RandomTable == 0 then
         local nums = {}
         for i, x in pairs(RandomTable) do
-            print(i)
+            print("q", i, x)
             table.insert(nums, i)
         end
+        if #nums == 0 then
+            return nil
+        end
+        print("z", Basics.dump(nums))
         return (RandomTable[Basics.RandomFromTable(nums)])
     end
+    print("d")
     return RandomTable[math.random(1, #RandomTable)]
 end
 

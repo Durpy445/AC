@@ -51,6 +51,22 @@ Generators.AddEvent(Board, require("Events").AddTripmine)
 --print(Basics.dump(Board.ChangeLog))
 Generators.RunNextEvent(Board)
 for index, value in pairs(Board.ChangeLog) do
-    print("z", Basics.dump(value))
-    print(Basics.dump(Generators.LogToNotation(value)))
 end
+
+local String = ""
+
+for index, value in ipairs(Board["Tiles"]) do
+    for index, value in ipairs(value) do
+        if value["Piece"] then
+            String = String .. string.sub(value["Piece"]["PieceType"]["Name"], 1, 1)
+        elseif Basics.RandomFromTable(value["SquarebuildList"]) ~= nil then
+            local Squarebuild = Basics.RandomFromTable(value["SquarebuildList"])
+            String = String .. string.sub(Squarebuild["SquarebuildType"], 1, 1)
+        else
+            String = String .. " "
+        end
+    end
+    String = String .. "\n"
+end
+
+print(String)

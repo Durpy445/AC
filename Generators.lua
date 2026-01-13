@@ -23,7 +23,7 @@ Generators.FormatTable = function(Board, PassedTable, Size)
     for x = 1, X, 1 do
         Row = {}
         for y = 1, Y, 1 do
-            local Tile = Basics.shallow_copy(Templates.TileTemplate)
+            local Tile = Basics.deep_copy(Templates.TileTemplate)
             Tile.TileID = Generators.GenerateID(Board)
             Tile.Position = { x, y }
             table.insert(Row, Tile)
@@ -107,7 +107,7 @@ Generators.CreateSquarebuild = function(SquarebuildType)
 end
 
 Generators.AddSquarebuildToLists = function(Board, Squarebuild)
-    print(Basics.dump(Squarebuild))
+    print("SUM", Basics.dump(Squarebuild))
     if Squarebuild.SquarebuildID == nil then
         Squarebuild.SquarebuildID = Generators.GenerateID(Board)
     end
