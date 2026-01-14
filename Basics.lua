@@ -69,5 +69,14 @@ Basics.FindAndRemove = function(Haystack, Needle)
     local Index = Basics.FindMatch(Haystack, Needle)
     table.remove(Haystack, Index)
 end
+Basics.Inbounds = function(bounds, position, offset)
+    if not offset then
+        offset = { 0, 0 }
+    end
+    if position[1] + offset[1] == 0 or position[2] + offset[2] == 0 or position[1] + offset[1] > bounds[1] or position[2] + offset[2] > bounds[2] then
+        return false
+    end
+    return true
+end
 
 return Basics
