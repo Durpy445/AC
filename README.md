@@ -4,5 +4,6 @@ A port of the roblox game Anarchy Chess to lua to be able to code it easier, the
 ### Todo
 - Debugging
 - Add more events
+- Add more Sqaurbuilds
 - Piece Movement Decoding
 - Piece Movement Functions
