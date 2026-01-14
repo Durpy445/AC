@@ -47,9 +47,20 @@ local Generators = require("Generators")
 
 Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
 Generators.AddEvent(Board, require("Events").AddTripmine)
---print(Basics.dump(Board))
---print(Basics.dump(Board.ChangeLog))
 Generators.RunNextEvent(Board)
+Generators.AddEvent(Board, require("Events").AddTripmine)
+Generators.RunNextEvent(Board)
+Generators.AddEvent(Board, require("Events").AddTripmine)
+Generators.RunNextEvent(Board)
+Generators.AddEvent(Board, require("Events").AddTripmine)
+Generators.RunNextEvent(Board)
+Generators.AddEvent(Board, require("Events").AddTripmine)
+Generators.RunNextEvent(Board)
+Generators.AddEvent(Board, require("Events").AddTripmine)
+Generators.RunNextEvent(Board)
+Generators.AddEvent(Board, require("Events").AddTripmine)
+Generators.RunNextEvent(Board)
+
 for index, value in pairs(Board.ChangeLog) do
 end
 
@@ -57,10 +68,10 @@ local String = ""
 
 for index, value in ipairs(Board["Tiles"]) do
     for index, value in ipairs(value) do
+        local Squarebuild = Basics.RandomFromTable(value["SquarebuildList"])
         if value["Piece"] then
             String = String .. string.sub(value["Piece"]["PieceType"]["Name"], 1, 1)
-        elseif Basics.RandomFromTable(value["SquarebuildList"]) ~= nil then
-            local Squarebuild = Basics.RandomFromTable(value["SquarebuildList"])
+        elseif Squarebuild ~= nil then
             String = String .. string.sub(Squarebuild["SquarebuildType"], 1, 1)
         else
             String = String .. " "
