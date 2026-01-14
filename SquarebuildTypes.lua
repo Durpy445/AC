@@ -23,5 +23,17 @@ SquarebuildTypes.Mine = {
     end,
 }
 
+SquarebuildTypes.Mine = {
+    Name = "Spikes",
+    Type = "Trigger",
+    SquarebuildFunction = function(Board, Squarebuild)
+        local Tile = Board.Tiles[Squarebuild.Position[1]][Squarebuild.Position[2]]
+        if Tile.Piece.PieceID then
+            local PieceID = Tile.Piece.PieceID
+            Generators.RemovePiece(Board, PieceID)
+        end
+    end,
+}
+
 
 return SquarebuildTypes
