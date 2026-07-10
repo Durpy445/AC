@@ -45,10 +45,12 @@ local Board = {
 local Basics = require("Basics")
 local Generators = require("Generators")
 
-Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
-Generators.AddEvent(Board, require("Events").AddTripmine)
-Generators.RunNextEvent(Board)
+local Minefield = require("Modifiers").Minefield
 
+Generators.FormatTable(Board, require("Boards").Deafult, { 8, 8 })
+
+Generators.AddModifierToBoard(Board, Minefield)
+Generators.RunModiferStartingFunction(Board, Minefield)
 for index, value in pairs(Board.ChangeLog) do
 end
 

@@ -4,13 +4,16 @@ local Modifiers = {}
 Modifiers.Minefield = {
     Weight = 1,
     StartingFunction = function(Board)
-        local EmptyTiles = Generators.GetAllEmptyTiles(Board)
         local Choosing = 4
         for i = 1, Choosing, 1 do
-            local Mine = Generators.CreateSquarebuild("Mine")
-            Generators.AddSquarebuildToLists(Mine)
+            EmptyTiles = Generators.GetAllEmptyTiles(Board)
             local Tile = Basics.RandomFromTable(EmptyTiles)
-            table.insert(Tile.SquarebuildList, Mine)
+            local Mine = Generators.CreateSquarebuild("Mine")
+            if Tile ~= nil then
+                Mine["Position"] = Basics.shallow_copy(Tile["Position"])
+                Generators.AddSquarebuildToLists(Board, Mine)
+                print("AZ")
+            end
         end
     end,
     TurnFunction = nil,
